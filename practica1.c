@@ -40,13 +40,21 @@ int sumaSubMax1(int v[], int n){
     return sumaMax;
 }
 
-
 int sumaSubMax2(int v[], int n){
    int estaSuma=0, sumaMax=0, j;
    for(j=0;j<n;j++){
-      
-   }
+      estaSuma=estaSuma+v[j];
+      if(estaSuma>sumaMax){
+        sumaMax=estaSuma;
+      }else{
+        if(estaSuma<0){
+          estaSuma=0;
+      }
+    } 
+  }
+   return sumaMax;
 }
+
 void listar_vector(int v[], int n){
 //TODO
 }
