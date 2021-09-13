@@ -57,11 +57,11 @@ int sumaSubMax2(int v[], int n){
 
 void listar_vector(int v[], int n){
   int i = 0; 
-   printf("{");
+   printf("[");
     for(i = 0; i < n-1; i++){
-        printf(" %d,",v[i]);
+        printf("%4d",v[i]);
     }
-    printf(" %d }",v[n-1]);
+    printf(" %4d ]",v[n-1]);
 }
 void test1(){
     int m[][6]={{-9, 2, -5, -4, 6},
@@ -71,10 +71,10 @@ void test1(){
                 {15, -2, -5, -4, 16},
                 {7, -5, 6, 7, -7}};
     int i,j = 0;
-    printf("\t\t\tsumaSubMax1\nsumaSubMax2");
+    printf("\t\t\t\tsumaSubMax1\tsumaSubMax2\n");
     for(i=0;i<6;i++) {
       listar_vector(m[i],5);
-      printf("\t%d\t%d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
+      printf("\t\t%d\t\t%d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
     }
 }
 void test2(){
