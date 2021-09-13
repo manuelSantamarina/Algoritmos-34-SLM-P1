@@ -76,7 +76,7 @@ void test1(){
     printf("\t\t\t\tsumaSubMax1\tsumaSubMax2\n");
     for(i=0;i<6;i++) {
       listar_vector(m[i],5);
-      printf("\t\t%d\t\t%d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
+      printf("\t\t%3d\t\t%3d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
     }
 }
 void test2(){
