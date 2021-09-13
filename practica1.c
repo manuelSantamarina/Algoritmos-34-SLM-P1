@@ -71,14 +71,14 @@ void test1(){
                 {15, -2, -5, -4, 16},
                 {7, -5, 6, 7, -7}};
     int i,j = 0;
-    printf("Secuencia\tResultado\n");
+    printf("\t\t\tsumaSubMax1\nsumaSubMax2");
     for(i=0;i<6;i++) {
       listar_vector(m[i],5);
       printf("\t%d\t%d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
     }
 }
 void test2(){
-//TODO
+  
 }
 
 
