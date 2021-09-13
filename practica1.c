@@ -70,7 +70,7 @@ void test1(){
                 {9, -2, 1, -7, -8},
                 {15, -2, -5, -4, 16},
                 {7, -5, 6, 7, -7}};
-    int i,j = 0;
+    int i = 0;
     printf("\t\t\t\tsumaSubMax1\tsumaSubMax2\n");
     for(i=0;i<6;i++) {
       listar_vector(m[i],5);
