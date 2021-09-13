@@ -61,9 +61,9 @@ void listar_vector(int v[], int n){
   int i = 0; 
    printf("[");
     for(i = 0; i < n-1; i++){
-        printf("%4d",v[i]);
+        printf("%3d",v[i]);
     }
-    printf(" %4d ]",v[n-1]);
+    printf("%3d ]",v[n-1]);
 }
 void test1(){
     int m[][6]={{-9, 2, -5, -4, 6},
@@ -73,14 +73,21 @@ void test1(){
                 {15, -2, -5, -4, 16},
                 {7, -5, 6, 7, -7}};
     int i = 0;
-    printf("\t\t\t\tsumaSubMax1\tsumaSubMax2\n");
+    printf("%35s%17s","sumaSubMax1","sumaSubMax2\n");
     for(i=0;i<6;i++) {
       listar_vector(m[i],5);
       printf("\t\t%3d\t\t%3d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
     }
 }
 void test2(){
-  
+  int v[9];
+    int i;
+    printf("%42s%16s\n","sumaSubMax1","sumaSubMax2");
+    for(i=0;i<6;i++) {
+        aleatorio(v, 9);
+        listar_vector(v,9);
+        printf("\t\t%2d\t\t%2d\n", sumaSubMax1(&v[i],5), sumaSubMax2(&v[i],5));
+    }
 }
 
 
