@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <sys/time.h>
-
+#include <math.h>
 /*Autores: 
 Luis Bardanca Rey (l.bardanca.rey)
 Manuel Santamariña Ruiz de León (manuel.santamarina)
