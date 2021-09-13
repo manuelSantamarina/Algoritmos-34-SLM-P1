@@ -56,10 +56,26 @@ int sumaSubMax2(int v[], int n){
 }
 
 void listar_vector(int v[], int n){
-//TODO
+  int i = 0; 
+   printf("{");
+    for(i = 0; i < n-1; i++){
+        printf(" %d,",v[i]);
+    }
+    printf(" %d }",v[n-1]);
 }
 void test1(){
-//TODO
+    int m[][6]={{-9, 2, -5, -4, 6},
+                {4, 0, 9, 2, 5},
+                {-2, -1, -9, -7, -1},
+                {9, -2, 1, -7, -8},
+                {15, -2, -5, -4, 16},
+                {7, -5, 6, 7, -7}};
+    int i,j = 0;
+    printf("Secuencia\tResultado\n");
+    for(i=0;i<6;i++) {
+      listar_vector(m[i],5);
+      printf("\t%d\t%d\n", sumaSubMax1(m[i],5), sumaSubMax2(m[i],5));
+    }
 }
 void test2(){
 //TODO
