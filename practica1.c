@@ -90,7 +90,7 @@ void test2(){
     }
 }
 
-double tiempo(int n, void(*ini)(int *, int), void(*ord)(int *, int)){
+double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
 	int i, k;
 	double tIni, tFin, t, t1, t2;
 	int *v = malloc(sizeof(int) * n);
