@@ -116,23 +116,25 @@ double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
 		tFin = microsegundos();
 		t2 = tFin - tIni;
 		t = (t1 - t2) / k;
-	}
+	}else{
+    printf(" ");
+  }
 	free(v);
 	return t; 
 }
 void cotas_sumaSubMax1(double t, int n){
 	double x, y, z;
-	x = t / pow(n, 0.9);
-	y = t / n;
-	z = t / pow(n, 1.2);
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
 	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
 }
 
 void cotas_sumaSubMax2(double t, int n){
 	double x, y, z;
-	x = t / pow(n, 0.9);
-	y = t / n;
-	z = t / pow(n, 1.2);
+	x = t / pow(n, 0.8);
+	y = t / pow(n, 0.9);
+	z = t / pow(n, 1.1);
 	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
 }
 
@@ -141,7 +143,7 @@ void tablas_sumaSubMax(){
 	double t;
 	char cota1[] = "n^1.8", cota2[] = "n^2", cota3[] = "n^2.2";
 	printf("\nSuma de la subsecuencia máxima, algoritmo 1\n");
-	printf("%5s %16s %18s %17s %17s\n", "n", "t(n)", "n^0.9", "n", "n^1.2");
+	printf("%5s %16s %18s %17s %17s\n", "n", "t(n)", "n^1.8", "n^2", "n^2.2");
 	for(i = 0; i < 3; i++){
 		for(j = 500; j < 64000; j = j * 2){
 			t = tiempo(j, aleatorio, sumaSubMax1);
