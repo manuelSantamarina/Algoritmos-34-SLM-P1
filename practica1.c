@@ -83,7 +83,7 @@ void test2(){
   int v[9];
     int i;
     printf("%42s%16s\n","sumaSubMax1","sumaSubMax2");
-    for(i=0;i<6;i++) {
+    for(i=0;i<10;i++) {
         aleatorio(v, 9);
         listar_vector(v,9);
         printf("\t\t%2d\t\t%2d\n", sumaSubMax1(&v[i],5), sumaSubMax2(&v[i],5));
