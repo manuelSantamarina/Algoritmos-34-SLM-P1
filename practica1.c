@@ -86,10 +86,9 @@ void test2(){
     for(i=0;i<10;i++) {
         aleatorio(v, 9);
         listar_vector(v,9);
-        printf("\t\t%2d\t\t%2d\n", sumaSubMax1(&v[i],5), sumaSubMax2(&v[i],5));
+        printf("\t\t%2d\t\t%2d\n", sumaSubMax1(v,9), sumaSubMax2(v,9));
     }
 }
-
 double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
 	int i, k;
 	double tIni, tFin, t, t1, t2;
@@ -141,7 +140,7 @@ void cotas_sumaSubMax2(double t, int n){
 void tablas_sumaSubMax(){
 	int i, j;
 	double t;
-	char cota1[] = "n^1.8", cota2[] = "n^2", cota3[] = "n^2.2";
+	char cota1[] = "n^0.8", cota2[] = "n^0.9", cota3[] = "n^1.1";
 	printf("\nSuma de la subsecuencia máxima, algoritmo 1\n");
 	printf("%5s %16s %18s %17s %17s\n", "n", "t(n)", "n^1.8", "n^2", "n^2.2");
 	for(i = 0; i < 3; i++){
