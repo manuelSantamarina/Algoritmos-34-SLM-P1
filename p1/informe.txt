@@ -2,9 +2,9 @@ INFORME Práctica 1
 
 Fecha: 21/09/2021
 Autores:
-Sergio Goyanes Legazpi (sergio.legazpi@udc.es)
-Luis Bardanca Rey (luis.bardanca@udc.es)
-Manuel Santamariña Ruiz de León (manuel.santamarina@udc.es)
+Sergio Goyanes Legazpi (sergio.legazpi)
+Luis Bardanca Rey (l.bardanca.rey)
+Manuel Santamariña Ruiz de León (manuel.santamarina)
 Máquina utilizada:
     CPU: i5 8300H @ 8x 2.3GHz [47.0ºC]
     OS: Ubuntu 21.04 hirsute
