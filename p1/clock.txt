@@ -1,0 +1,1 @@
+#la función clock.txt permite medir el tiempo.
