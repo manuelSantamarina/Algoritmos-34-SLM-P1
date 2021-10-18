@@ -160,7 +160,161 @@ void test(){
         }
     }
 }
+double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
+	int i, k;
+	double tIni, tFin, t, t1, t2;
+	int *v = malloc(sizeof(int) * n);
 
+	k = 1001;
+	(*ini)(v, n);
+	tIni = microsegundos();
+	(*ord)(v, n);
+	tFin = microsegundos();
+	t = tFin - tIni;
+	if(t < 500){
+		printf("#");
+		tIni = microsegundos();
+		for(i = 0; i < k; i++){
+			(*ini)(v, n);
+			(*ord)(v, n);
+		}
+		tFin = microsegundos();
+		t1 = tFin - tIni;
+		tIni = microsegundos();
+		for(i = 0; i < k; i++)
+			(*ini)(v, n);
+		tFin = microsegundos();
+		t2 = tFin - tIni;
+		t = (t1 - t2) / k;
+	}else{
+    printf(" ");
+  }
+	free(v);
+	return t; 
+}
+
+void cotas_shellAsc(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void cotas_shellDesc(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void cotas_shellAle(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void cotas_selAsc(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void cotas_selDesc(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void cotas_selAle(double t, int n){
+	double x, y, z;
+	x = t / pow(n, 1.8);
+	y = t / pow(n, 2);
+	z = t / pow(n, 2.2);
+	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void tablas_shell(){
+    int i,j;
+    double t;
+
+    char cotasAsc[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    char cotasDesc[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    char cotasAle[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    
+    printf("\nOrdenación Shell, inicialización ascendente\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasAsc[0], cotasAsc[1], cotasAsc[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, ascendente, ord_shell);
+			cotas_shellAsc(t, j);
+		}
+		printf("\n");
+	}
+    printf("\nOrdenación Shell, inicialización descendente\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasDesc[0], cotasDesc[1], cotasDesc[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, descendente, ord_shell);
+			cotas_shellDesc(t, j);
+		}
+		printf("\n");
+	}
+
+    printf("\nOrdenación Shell, inicialización aleatoria\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasAle[0], cotasAle[1], cotasAle[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, aleatorio, ord_shell);
+			cotas_shellAle(t, j);
+		}
+		printf("\n");
+	}
+}
+void tablas_sel(){
+    int i,j;
+    double t;
+
+    char cotasAsc[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    char cotasDesc[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    char cotasAle[3][5] = {"n^0.8", "n^0.9", "n^1.1"};
+    
+    printf("\nOrdenación por selección, inicialización ascendente\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasAsc[0], cotasAsc[1], cotasAsc[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, ascendente, ord_sel);
+			cotas_selAsc(t, j);
+		}
+		printf("\n");
+	}
+    printf("\nOrdenación por selección, inicialización descendente\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasDesc[0], cotasDesc[1], cotasDesc[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, descendente, ord_sel);
+			cotas_selDesc(t, j);
+		}
+		printf("\n");
+	}
+
+    printf("\nOrdenación por selección, inicialización aleatoria\n");
+	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", cotasAle[0], cotasAle[1], cotasAle[2]);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 512001; j = j * 2){
+			t = tiempo(j, aleatorio, ord_sel);
+			cotas_selAle(t, j);
+		}
+		printf("\n");
+	}
+}
+void tablas(){
+
+	tablas_sel();
+    tablas_shell();
+	
+}
 
 int main(){
     inicializar_semilla();
@@ -172,4 +326,5 @@ int main(){
     }
     printf("\n");
     test();
+    tablas_shell();
 }
