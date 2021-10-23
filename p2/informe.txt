@@ -1,0 +1,125 @@
+INFORME Práctica 1
+
+Fecha: 23/10/2021
+Autores:
+Sergio Goyanes Legazpi (sergio.legazpi@udc.es)
+Luis Bardanca Rey (luis.bardanca@udc.es)
+Manuel Santamariña Ruiz de León (manuel.santamarina@udc.es)
+Máquina utilizada:
+Dell G3 15 3579
+    CPU: i5 8300H @ 8x 2.3GHz [47.0ºC]
+    OS: Ubuntu 21.04 hirsute
+    RAM: 15846MiB
+
+Unidad utilizada: Microsegundos
+
+Introducción:
+En este informe se analizará el rendimiento de dos algoritmos de ordenación de un vector. Primero ejecutaremos unas funciones test para comprobar que los algoritmos funcionan correctamente y después pasaremos a la medición de tiempos y a la comprobación empírica de la complejidad computacional.
+
+Tiempos:
+Ordenación Shell, inicialización ascendente
+    n             t(n)             /n^1.09            /n^1.13           /n^1.2
+#   500        25.4870000         0.0291368         0.0227239         0.0147080
+#  1000        57.1940000         0.0307150         0.0232997         0.0143665
+#  2000       126.2770000         0.0318568         0.0235050         0.0138066
+#  4000       275.3110000         0.0326271         0.0234151         0.0131024
+   8000       599.0000000         0.0333472         0.0232774         0.0124085
+  16000      1327.0000000         0.0347040         0.0235622         0.0119654
+  32000      2832.0000000         0.0347920         0.0229760         0.0111151
+
+Cota subestimada: n^1.09
+Cota ajustada: n^1.13
+Cota sobreestimada: n^1.2
+Constante a la que tiende: 0.0235 
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Ordenación Shell, inicialización descendente
+    n             t(n)             /n^1.1            /n^1.14           /n^1.25
+#   500        35.4730000         0.0381093         0.0297216         0.0150033
+#  1000        78.5040000         0.0393452         0.0298464         0.0139602
+#  2000       174.6070000         0.0408252         0.0301223         0.0130549
+#  4000       379.9540000         0.0414443         0.0297429         0.0119442
+   8000       840.0000000         0.0427445         0.0298371         0.0111024
+  16000      1796.0000000         0.0426358         *0.0289474        0.0099806
+  32000      4011.0000000         0.0444209         0.0293347         0.0093716
+
+Cota subestimada: n^1.1
+Cota ajustada: n^1.14
+Cota sobreestimada: n^1.25
+Constante a la que tiende: 0.0297 
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Ordenación Shell, inicialización aleatoria
+    n             t(n)             /n^1.1            /n^1.17           /n^1.3
+#   500        86.7650000         0.0932132         0.0603323         0.0268957
+#  1000       196.9400000         0.0987038         0.0608603         0.0247933
+#  2000       447.4840000         0.1046272         0.0614572         0.0228791
+   4000      1015.0000000         0.1107134         0.0619521         0.0210760
+   8000      2252.0000000         0.1145960         0.0610876         0.0189912
+  16000      5018.0000000         0.1191238         0.0604937         0.0171860
+  32000     10945.0000000         0.1212134         *0.0586395        0.0152237
+
+Cota subestimada: n^1.1
+Cota ajustada: n^1.17
+Cota sobreestimada: n^1.3
+Constante a la que tiende: 0.0614
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Ordenación por selección, inicialización ascendente
+    n             t(n)             /n^1.8            /n^2              /n^2.2
+#   500       440.0210000         0.0061000         0.0017601         0.0005079
+   1000      1747.0000000         0.0069549         0.0017470         0.0004388
+   2000      6954.0000000         0.0079502         0.0017385         0.0003802
+   4000     27750.0000000         0.0091108         0.0017344         0.0003302
+   8000    110862.0000000         0.0104525         0.0017322         0.0002871
+  16000    444323.0000000         0.0120305         0.0017356         0.0002504
+  32000   1775417.0000000         0.0138048         0.0017338         0.0002178
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobreestimada: n^2.2
+Constante a la que tiende: 0.0173 
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Ordenación por selección, inicialización descendente
+    n             t(n)             /n^1.8            /n^2              /n^2.1
+#   500       473.6580000         0.0065663         0.0018946         0.0010177
+   1000      1866.0000000         0.0074287         0.0018660         0.0009352
+   2000      7414.0000000         0.0084761         0.0018535         0.0008667
+   4000     29568.0000000         0.0097076         0.0018480         0.0008063
+   8000    118128.0000000         0.0111376         0.0018457         0.0007514
+  16000    474108.0000000         0.0128369         0.0018520         0.0007034
+  32000   1896163.0000000         0.0147437         0.0018517         0.0006562
+
+Cota subestimada: n^1.8
+Cota ajustada: n^2
+Cota sobreestimada: n^2.1
+Constante a la que tiende:  0.00184
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Ordenación por selección, inicialización aleatoria
+    n             t(n)             /n^1.9            /n^1.98           /n^2.1
+#   500       476.2200000         0.0035462         0.0021570         0.0010232
+   1000      1825.0000000         0.0036414         0.0020954         0.0009147
+   2000      7136.0000000         0.0038150         0.0020769         0.0008342
+   4000     28225.0000000         0.0040432         0.0020824         0.0007697
+   8000    111747.0000000         0.0042891         0.0020899         0.0007108
+  16000    445850.0000000         0.0045852         0.0021136         0.0006615
+  32000   1780689.0000000         0.0049069         0.0021399         0.0006163
+
+Cota subestimada: n^1.9
+Cota ajustada: n^1.98
+Cota sobreestimada: n^2.1
+Constante a la que tiende: 0.0020
+Los tiempos marcados con # se han promediado entre k iteraciones, siendo k 1000.
+Los tiempos considerados anómalos se han indicado con *
+
+Conclusión:
+
+Descubrimos tras este experimento que el algoritmo Shell es una gran mejora sobre el algoritmo de selección, puesto que reduce en gran cantidad el número de inversiones a realizar al ordenar el vector, y lo supera en todos los casos.
+También observamos que para ambos algoritmos, el mejor caso es cuando el vector ya está ordenado, y el peor cuando está ordenado de manera descendente.

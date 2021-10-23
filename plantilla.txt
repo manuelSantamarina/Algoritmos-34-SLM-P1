@@ -8,14 +8,15 @@ Manuel Santamariña Ruiz de León (manuel.santamarina@udc.es)
 Máquina utilizada:
 Dell G3 15 3579
     CPU: i5 8300H @ 8x 2.3GHz [47.0ºC]
-    OS: Ubuntu 21.04 hirsute
+    OS: Kubuntu 21.04 hirsute
+    DE: KDE Plasma 5.21
     RAM: 15846MiB
 
 Unidad utilizada: Microsegundos
 
 
 Introducción:
-En este informe se analizará el rendimiento de dos algoritmos para el cálculo de la suma de la subsecuencia máxima contenida dentro de un vector. Primero ejecutaremos unas funciones test para comprobar que los algoritmos funcionan correctamente y después pasaremos a la medición de tiempos y a la comprobación empírica de la complejidad computacional.
+En este informe se analizará el rendimiento de dos algoritmos de ordenación de un vector. Primero ejecutaremos unas funciones test para comprobar que los algoritmos funcionan correctamente y después pasaremos a la medición de tiempos y a la comprobación empírica de la complejidad computacional.
 
 Tiempos:
 
