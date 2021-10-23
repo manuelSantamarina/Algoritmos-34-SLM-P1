@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
 /*Autores: 
 Luis Bardanca Rey (l.bardanca.rey)
 Manuel Santamariña Ruiz de León (manuel.santamarina)
@@ -77,7 +78,7 @@ void ord_shell(int v[], int n){
     }while(incremento!=0);
 }
 
-double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
+double tiempo(int n, void(*ini)(int *, int), void(*ord)(int *, int)){
 	int i, k;
 	double tIni, tFin, t, t1, t2;
 	int *v = malloc(sizeof(int) * n);
