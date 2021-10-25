@@ -4,6 +4,14 @@
 #include <sys/time.h>
 #include <math.h>
 #include <stdbool.h>
+<<<<<<< HEAD
+/*Autores: 
+Luis Bardanca Rey (l.bardanca.rey)
+Manuel Santamariña Ruiz de León (manuel.santamarina)
+Sergio Goyanes Legazpi (sergio.legazpi)
+*/
+=======
+>>>>>>> 479573b4b46c09a970dcd7ac1079ccba017af225
 double microsegundos(){
     struct timeval t;
     if(gettimeofday(&t, NULL) < 0)
@@ -31,6 +39,8 @@ void descendente(int v [], int n) {
     int i;
     for (i=0; i < n; i++)
         v[i] = (n-1)-i;
+<<<<<<< HEAD
+=======
 }
 
 void ord_sel(int v[], int n){
@@ -155,24 +165,132 @@ void test(){
             printf("\n");
         }
     }
+>>>>>>> 479573b4b46c09a970dcd7ac1079ccba017af225
 }
 
-void listar_vector(int v[], int n){
-  int i = 0; 
-   printf("[");
-    for(i = 0; i < n-1; i++){
-        printf("%3d",v[i]);
+void ord_sel(int v[], int n){
+    int minj, minx, i, j;
+    for(i=0;i<n-1;i++){
+        minj=i;
+        minx=v[i];
+        for(j=i+1;j<n;j++){
+            if(v[j]<minx){
+                minj=j;
+                minx=v[j];
+            }
+        }
+        v[minj]=v[i];
+        v[i]=minx;
     }
-    printf("%3d ]",v[n-1]);
+}
+
+void ord_shell(int v[], int n){
+    int incremento, tmp, i, j;
+    bool seguir;
+    incremento=n-1;//Posicion ultima del vector
+    do{
+        incremento=incremento/2;//lo dividimos por dos
+        for(i=incremento;i<n;i++){
+            tmp=v[i];
+            j=i;
+            seguir=true;
+            while(j-incremento>=0 && seguir){
+                if(tmp<v[j-incremento]){
+                    v[j]=v[j-incremento];
+                    j=j-incremento;
+                }
+                else
+                    seguir=false;
+            }
+            v[j]=tmp;
+        }
+    }while(incremento!=0);
 }
 void test(){
+    int a;
+    int v[10];
+    int n=10;
+    //se inicializa aleatoriamente el vector
+    printf("Inicializacion aleatoria\n");
+    aleatorio(v, 10);
+    for(int k=0;k<10;k++)
+        printf("%d ", v[k]);
+    printf("\n");
+    printf("Ordenado?\n");
+    scanf("%d", &a);
+    if(a==0){
+        printf("Ordenacion? seleccion/shell\n");
+        scanf("%d", &a);
+        if(a==0){
+            printf("Ordenacion por seleccion:\n");
+            ord_sel(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+        if(a==1){
+            printf("Ordenacion por shell:\n");
+            ord_shell(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+        printf("Ordenado?\n");
+    }
 
-}
-double tiempo(int n, void(*ini)(int *, int), int(*ord)(int *, int)){
-	int i, k;
-	double tIni, tFin, t, t1, t2;
-	int *v = malloc(sizeof(int) * n);
-
+<<<<<<< HEAD
+   printf("\n");
+    printf("Inicializacion descendente\n");
+    descendente(v, 10);
+    for(int k=0;k<10;k++)
+        printf("%d ", v[k]);
+    printf("\n");
+    printf("Ordenado?\n");
+    scanf("%d", &a);
+    if(a==0){
+        printf("Ordenacion por seleccion/shell?\n");
+        scanf("%d", &a);
+        if(a==0){
+            printf("Ordenacion por seleccion:\n");
+            ord_sel(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+        if(a==1){
+            printf("Ordenacion por shell:\n");
+            ord_shell(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+    }
+    printf("Inicializacion ascendente\n");
+    ascendente(v, 10);
+    for(int k=0;k<10;k++)
+        printf("%d ", v[k]);
+    printf("\n");
+    printf("Ordenado?\n");
+    scanf("%d", &a);
+    if(a==0){
+        printf("Ordenacion por seleccion/shell?\n");
+        scanf("%d", &a);
+        if(a==0){
+            printf("Ordenacion por seleccion:\n");
+            ord_sel(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+        if(a==1){
+            printf("Ordenacion por shell:\n");
+            ord_shell(v, 10);
+            for(int k=0;k<10;k++)
+                printf("%d ", v[k]);
+            printf("\n");
+        }
+    }
+=======
 	k = 1001;
 	(*ini)(v, n);
 	tIni = microsegundos();
@@ -207,22 +325,9 @@ void cotas_algoritmo(double t, int n){
 	y = t / pow(n, 2);
 	z = t / pow(n, 2.2);
 	printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+>>>>>>> 479573b4b46c09a970dcd7ac1079ccba017af225
 }
 
-void tablas_algoritmo(){
-	int i, j;
-	double t;
-	char cota1[] = "n^0.8", cota2[] = "n^0.9", cota3[] = "n^1.1";
-	printf("\Algoritmo 1\n");
-	printf("%5s %16s %18s %17s %17s\n", "n", "t(n)", "T(n)/n^1.8", "T(n)n^2", "T(n)/n^2.2");
-	for(i = 0; i < 3; i++){
-		for(j = 500; j < 64000; j = j * 2){
-			t = tiempo(j, aleatorio, algoritmo);
-			cotas_algoritmo(t, j);
-		}
-		printf("\n");
-	}
-}
 
 int main(){
     inicializar_semilla();
