@@ -172,24 +172,7 @@ void ord_rapida(int v [], int n) {
 }
 
 
-
-void aux_test(int v[], int n, char ordenacion[]){
-    if(strcmp(ordenacion, "insercion")==0){
-        printf("Ordenacion por seleccion:\n");
-        ord_ins(v, n);
-        listar_vector(v, n);
-        printf("\n");
-    }
-    if(strcmp(ordenacion, "quick")==0){
-        printf("Ordenacion por quicksort:\n");
-        ord_rapida(v, n);
-        listar_vector(v, n);
-        printf("\n");
-    }
-}
-
-
-void test_quick(){
+void test(void(*ord)(int *, int)){
     int a;
     int n=11;
     int v[n];
@@ -198,58 +181,40 @@ void test_quick(){
     listar_vector(v, n);
     a=esta_ordenado(v, n);//0->false // 1->true
     printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "quick");
+    if(a==0) {
+        (*ord)(v, n);
+        printf("Ordenado:\n");
+        listar_vector(v, n);
+    }
     printf("Inicialización descendente\n");
     descendente(v, n);
     listar_vector(v, n);
     a=esta_ordenado(v, n);
     printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "quick");
+    if(a==0) {
+        (*ord)(v, n);
+        printf("Ordenado:\n");
+        listar_vector(v, n);
+    }
     printf("Inicialización ascendente\n");
     ascendente(v, n);
     listar_vector(v, n);
     a=esta_ordenado(v, n);
     printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "quick");
-    printf("\n");
-}
-
-
-
-void test_ins(){
-    int a;
-    int n=11;
-    int v[n];
-    printf("Inicialización aleatoria\n");
-    aleatorio(v, n);
-    listar_vector(v, n);
-    a=esta_ordenado(v, n);//0->false // 1->true
-    printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "insercion");
-    printf("Inicialización descendente\n");
-    descendente(v, n);
-    listar_vector(v, n);
-    a=esta_ordenado(v, n);
-    printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "insercion");
-    printf("Inicialización ascendente\n");
-    ascendente(v, n);
-    listar_vector(v, n);
-    a=esta_ordenado(v, n);
-    printf("Ordenado? %d\n", a);
-    if(a==0)
-        aux_test(v, n, "insercion");
+    if(a==0) {
+        (*ord)(v, n);
+        printf("Ordenado:\n");
+        listar_vector(v, n);
+    }
     printf("\n");
 }
 
 
 int main() {
-    test_ins();
-    test_quick();
+    inicializar_semilla();
+    printf("Ordenacion por insercion:\n");
+    test(ord_ins);
+    printf("Ordenacion por quicksort:\n");
+    test(ord_rapida);
     return 0;
 }
