@@ -152,12 +152,12 @@ void rapida_aux(int v[], int izq, int der){
         do {
             do {
                 ++i;
-            }while(v[i]>=pivote);
+            }while(v[i]<pivote);
             do {
                 --j;
-            }while(v[j]<=pivote);
+            }while(v[j]>pivote);
             intercambiar(v, i, j);
-        }while(j<=i);
+        }while(j>i);
         intercambiar(v, i, j);
         intercambiar(v, izq, j);
         rapida_aux(v, izq, j-1);
