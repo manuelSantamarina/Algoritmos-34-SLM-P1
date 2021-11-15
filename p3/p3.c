@@ -107,6 +107,8 @@ void listar_vector(int v[], int n){
     printf("%4d ]",v[n-1]);
     printf("\n");
 }
+
+
 void ord_ins(int v[], int n){
     int i, x, j;
     for(i=1;i<n;i++){
