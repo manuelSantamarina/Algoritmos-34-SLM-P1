@@ -22,7 +22,19 @@ Luis Bardanca Rey (l.bardanca.rey)
 Manuel Santamariña Ruiz de León (manuel.santamarina)
 Sergio Goyanes Legazpi (sergio.legazpi)
 */
-
+typedef struct execData 
+{
+    char titulo [32];
+    
+    float cotaAjustada;
+    float cotaSubestimada;
+    float cotaSobreestimada;
+    void(*ini1)(int *, int);
+    void(*ini2)(int *, int);
+    void(*ini3)(int *, int);
+    void(*ord)(int *, int);
+    char *inicializaciones[];
+}execData;
 double microsegundos(){
     struct timeval t;
     if(gettimeofday(&t, NULL) < 0)
@@ -210,13 +222,222 @@ void test(void(*ord)(int *, int)){
     }
     printf("\n");
 }
+void cotas_general(double t, int n, float cotas[]){
+    double x,y,z;
+    x = t / pow(n,cotas[0]);
+    y = t / pow(n,cotas[1]);
+    z = t / pow(n,cotas[2]);
+    printf("%6d %17.7f %17.7f %17.7f %17.7f\n", n, t, x, y, z);
+}
+void printCotas(float cotas[]) {
+    printf("%5s %16s %15s%0.2f %13s%0.2f %13s%0.2f\n", "n", "t(n)", 
+    "t/n^",cotas[0],"t/n^", cotas[1],"t/n^", cotas[2]);
+}
 
+void printDescripCotas(float cotas[]) {
+
+    printf("\n\n");
+    printf("Cota subestimada: n^%0.2f\n", cotas[0]);
+    printf("Cota ajustada: n^%0.2f\n", cotas[1]);
+    printf("Cota sobreestimada: n^%0.2f\n",cotas[2]);
+    printf("\n\n");
+}
+void tablas_ord_rap(char *titulo,
+    float cotasAsc[], float cotasDesc[], float cotasAle[]){
+    int i,j;
+    double t;
+
+    printf("\n%s, inicialización ascendente\n",titulo);
+	printCotas(cotasAsc);
+    
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, ascendente, ord_rapida);
+			cotas_general(t, j,cotasAsc);
+		}
+		printf("\n");
+	}
+
+    printDescripCotas(cotasAsc);
+    
+    printf("\n%s, inicialización descendente\n",titulo);
+	printCotas(cotasDesc);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, descendente, ord_rapida);
+			cotas_general(t, j, cotasDesc);
+		}
+		printf("\n");
+	}
+
+    printDescripCotas(cotasDesc);
+    printf("\n%s, inicialización ascendente\n",titulo);
+	printCotas(cotasAle);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, aleatorio, ord_rapida);
+			cotas_general(t, j,cotasAle);
+		}
+		printf("\n");
+	}
+    
+}
+
+void tablas_tripleinit(char *titulo,
+    float cotasAsc[], float cotasDesc[], float cotasAle[], 
+    void(*ord)(int *, int)){
+    int i,j;
+    double t;
+
+    printf("\n%s, inicialización ascendente\n",titulo);
+	printCotas(cotasAsc);
+    
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, ascendente, ord);
+			cotas_general(t, j,cotasAsc);
+		}
+		printf("\n");
+	}
+
+    printDescripCotas(cotasAsc);
+    
+    printf("\n%s, inicialización descendente\n",titulo);
+	printCotas(cotasDesc);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, descendente, ord);
+			cotas_general(t, j, cotasDesc);
+		}
+		printf("\n");
+	}
+    printDescripCotas(cotasDesc);
+    
+    printf("\n%s, inicialización aleatoria\n",titulo);
+	printCotas(cotasAle);
+	for(i = 0; i < 3; i++){
+		for(j = 500; j < 64000; j = j * 2){
+			t = tiempo(j, aleatorio, ord);
+			cotas_general(t, j,cotasAle);
+		}
+		printf("\n");
+	}
+
+    printDescripCotas(cotasAle);
+}
+// void tablas_tripleinitbak(char *titulo,
+//     float cotasAsc[], float cotasDesc[], float cotasAle[], void(*ord)
+//(int *, int)){
+//     int i,j;
+//     double t;
+
+//     printf("\n%s, inicialización ascendente\n",titulo);
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasAsc[0], cotasAsc[1], cotasAsc[2]);
+    
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, ascendente, ord);
+// 			cotas_general(t, j,cotasAsc);
+// 		}
+// 		printf("\n");
+// 	}
+//     printf("\n%s, inicialización descendente\n",titulo);
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasDesc[0], cotasDesc[1], cotasDesc[2]);
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, descendente, ord);
+// 			cotas_general(t, j, cotasDesc);
+// 		}
+// 		printf("\n");
+// 	}
+
+//     printf("\n%s, inicialización ascendente\n",titulo);
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasAle[0], cotasAle[1], cotasAle[2]);
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, aleatorio, ord);
+// 			cotas_general(t, j,cotasAle);
+// 		}
+// 		printf("\n");
+// 	}
+// }
+// void tablast(char titulo,
+//     float cotasAsc[], float cotasDesc[], float cotasAle[]){
+//     int i,j;
+//     double t;
+
+//     printf("\n%s, inicialización ascendente\n",titulo);
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasAsc[0], cotasAsc[1], cotasAsc[2]);
+    
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, ascendente, ord_rapida);
+// 			cotas_general(t, j,cotasAsc);
+// 		}
+// 		printf("\n");
+// 	}
+//     printf("\nOrdenación Shell, inicialización descendente\n");
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasDesc[0], cotasDesc[1], cotasDesc[2]);
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, descendente, ord_rapida);
+// 			cotas_general(t, j, cotasDesc);
+// 		}
+// 		printf("\n");
+// 	}
+
+//     printf("\nOrdenación Shell, inicialización aleatoria\n");
+// 	printf("%5s %16s %16s %18s %17s\n", "n", "t(n)", 
+//     cotasAle[0], cotasAle[1], cotasAle[2]);
+// 	for(i = 0; i < 3; i++){
+// 		for(j = 500; j < 64000; j = j * 2){
+// 			t = tiempo(j, aleatorio, ord_rapida);
+// 			cotas_general(t, j,cotasAle);
+// 		}
+// 		printf("\n");
+// 	}
+// }
 
 int main() {
     inicializar_semilla();
-    printf("Ordenacion por insercion:\n");
+    printf("Ordenación por inserción:\n");
     test(ord_ins);
-    printf("Ordenacion por quicksort:\n");
+    printf("Ordenación por quicksort:\n");
     test(ord_rapida);
-    return 0;
+
+
+    //cota subestimada, ajustada y sobreestimada
+    float cotasAsc1[3] = {0.9f, 1.0f, 1.1f};
+    float cotasDesc1[3] = {1.9f, 2.0f, 2.1f};
+    float cotasAle1[3] = {1.9f, 2.0f, 2.1f};
+
+    tablas_tripleinit("Ordenación por inserción",cotasAsc1,cotasDesc1,cotasAle1, 
+    ord_ins);
+
+
+
+    float cotasAsc2[3] = {1.0f, 1.07f, 1.22f};
+    float cotasDesc2[3] = {1.0f, 1.07f, 1.16f};
+    float cotasAle2[3] = {1.0f, 1.08f, 1.15f};
+    
+    //Cotas umbral 10
+    // float cotasAsc2[3] = {1.0f, 1.07f, 1.22f};
+    // float cotasDesc2[3] = {1.0f, 1.07f, 1.16f};
+    // float cotasAle2[3] = {1.0f, 1.08f, 1.2f};
+
+    //Cotas umbral 100
+    // float cotasAsc2[3] = {1.0f, 1.07f, 1.15f};
+    // float cotasDesc2[3] = {1.0f, 1.16f, 1.22f};
+    // float cotasAle2[3] = {1.0f, 1.09f, 1.15f};
+    
+    tablas_tripleinit("Ordenación rápida",cotasAsc2,cotasDesc2,cotasAle2,
+     ord_rapida);
+
+    printf("Los tiempos marcados con # son tiempos %s\n",
+    "promediados entre k iteraciones, siendo k = 1000");
 }

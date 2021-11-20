@@ -1,0 +1,259 @@
+INFORME Práctica 2
+
+Fecha: 20/11/2021
+
+Autores:
+Sergio Goyanes Legazpi (sergio.legazpi@udc.es)
+Luis Bardanca Rey (luis.bardanca@udc.es)
+Manuel Santamariña Ruiz de León (manuel.santamarina@udc.es)
+
+Máquina utilizada:
+Dell G3 15 3579
+    CPU: i5 8300H @ 8x 2.3GHz [47.0ºC]
+    OS: Ubuntu 21.10 impish indri
+    DE: KDE Plasma 5.22.90 (deshabilitado en el momento de la ejecución).
+    RAM: 15846MiB
+
+Unidad utilizada: Microsegundos
+
+Introducción:
+En este informe se analizará el rendimiento de dos algoritmos de ordenación de un vector, insertion sort y quicksort. En el último caso ejecutaremos el algoritmo varias veces, dos de ellas con la ayuda de un algoritmo de ordenación auxiliar para optimizar el tiempo de ejecución. Este algoritmo se ejecutará tras llegar a unos casos base de un vector de tamaño determinado, que denominamos umbral, y hemos seleccionado 10 y 100. En el caso de umbral 1, dado que el tamaño del vector sería 1, el algoritmo de ordenación auxiliar no llega a ejecutarse. 
+
+Comprobación empírica de la complejidad computacional:
+Umbral 1: 
+Los tiempos marcados con # son tiempos promediados entre k iteraciones, siendo k = 1000
+Los tiempos anómalos, en el caso de haberlos
+
+
+--------------------ORDENACIÓN POR INSERCIÓN
+
+Ordenación por inserción, inicialización ascendente
+    n             t(n)            t/n^0.90          t/n^1.00          t/n^1.10
+#   500         2.5740000         0.0095838         0.0051480         0.0027653
+#  1000         5.1120000         0.0101998         0.0051120         0.0025621
+#  2000        10.1600000         0.0108634         0.0050800         0.0023755
+#  4000        20.4990000         0.0117457         0.0051247         0.0022360
+#  8000        40.8700000         0.0125494         0.0051087         0.0020797
+# 16000        82.6850000         0.0136056         0.0051678         0.0019629
+# 32000       166.2970000         0.0146639         0.0051968         0.0018417
+
+
+
+Cota subestimada: n^0.90
+Cota ajustada: n^1.00
+Cota sobreestimada: n^1.10
+
+
+
+Ordenación por inserción, inicialización descendente
+    n             t(n)            t/n^1.90          t/n^2.00          t/n^2.10
+#   500       464.4170000         0.0034583         0.0018577         0.0009979
+   1000      1838.0000000         0.0036673         0.0018380         0.0009212
+   2000      7471.0000000         0.0039941         0.0018678         0.0008734
+   4000     29947.0000000         0.0042898         0.0018717         0.0008166
+   8000    121178.0000000         0.0046511         0.0018934         0.0007708
+  16000    484751.0000000         0.0049853         0.0018936         0.0007192
+  32000   1933175.0000000         0.0053270         0.0018879         0.0006690
+
+
+
+Cota subestimada: n^1.90
+Cota ajustada: n^2.00
+Cota sobreestimada: n^2.10
+
+
+
+Ordenación por inserción, inicialización aleatoria
+    n             t(n)            t/n^1.90          t/n^2.00          t/n^2.10
+#   500       239.1050000         0.0017805         0.0009564         0.0005138
+   1000       897.0000000         0.0017898         0.0008970         0.0004496
+   2000      3788.0000000         0.0020251         0.0009470         0.0004428
+   4000     15193.0000000         0.0021764         0.0009496         0.0004143
+   8000     59275.0000000         0.0022751         0.0009262         0.0003770
+  16000    241082.0000000         0.0024793         0.0009417         0.0003577
+  32000    961365.0000000         0.0026491         0.0009388         0.0003327
+
+
+
+Cota subestimada: n^1.90
+Cota ajustada: n^2.00
+Cota sobreestimada: n^2.10
+
+
+
+
+--------------------QUICKSORT---------------------------
+INICIALIZACIÓN ASCENDENTE---------------------
+Umbral 1:
+Ordenación rápida, inicialización ascendente
+    n             t(n)            t/n^1.00          t/n^1.07          t/n^1.22
+#   500        20.0050000         0.0400100         0.0258965         0.0101952
+#  1000        42.8250000         0.0428250         0.0264057         0.0093691
+#  2000        91.4010000         0.0457005         0.0268441         0.0085841
+#  4000       195.0490000         0.0487623         0.0272860         0.0078638
+#  8000       411.8480000         0.0514810         0.0274429         0.0071280
+  16000       869.0000000         0.0543125         0.0275811         0.0064564
+  32000      1833.0000000         0.0572812         0.0277110         0.0058463
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.07
+Cota sobreestimada: n^1.22
+
+Umbral 10: 
+Ordenación rápida, inicialización ascendente
+    n             t(n)            t/n^1.00          t/n^1.07          t/n^1.22
+#   500        13.1330000         0.0262660         0.0170007         0.0066930
+#  1000        29.2270000         0.0292270         0.0180212         0.0063942
+#  2000        64.6260000         0.0323130         0.0189804         0.0060695
+#  4000       140.5290000         0.0351322         0.0196590         0.0056657
+#  8000       303.8620000         0.0379828         0.0202474         0.0052590
+  16000       652.0000000         0.0407500         0.0206937         0.0048442
+  32000      1398.0000000         0.0436875         0.0211347         0.0044589
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.07
+Cota sobreestimada: n^1.22
+
+Umbral 100:
+Ordenación rápida, inicialización ascendente
+    n             t(n)            t/n^1.00          t/n^1.07          t/n^1.15
+#   500         7.2770000         0.0145540         0.0094201         0.0057298
+#  1000        17.6860000         0.0176860         0.0109051         0.0062752
+#  2000        40.5920000         0.0202960         0.0119217         0.0064902
+#  4000        92.5660000         0.0231415         0.0129493         0.0066693
+#  8000       207.7960000         0.0259745         0.0138462         0.0067466
+# 16000       462.6720000         0.0289170         0.0146847         0.0067692
+  32000      1017.0000000         0.0317812         0.0153748         0.0067050
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.07
+Cota sobreestimada: n^1.15
+
+INICIALIZACIÓN DESCENDENTE---------------------
+Umbral 1:
+Ordenación rápida, inicialización descendente
+    n             t(n)            t/n^1.00          t/n^1.07          t/n^1.16
+#   500        20.8570000         0.0417140         0.0269994         0.0154329
+#  1000        44.5840000         0.0445840         0.0274903         0.0147632
+#  2000        94.8940000         0.0474470         0.0278700         0.0140619
+#  4000       202.0820000         0.0505205         0.0282698         0.0134010
+#  8000       426.8710000         0.0533589         0.0284440         0.0126681
+  16000       898.0000000         0.0561250         0.0285015         0.0119261
+  32000      1890.0000000         0.0590625         0.0285727         0.0112328
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.07
+Cota sobreestimada: n^1.16
+
+Umbral 10:
+Ordenación rápida, inicialización descendente
+    n             t(n)            t/n^1.00          t/n^1.07         t/n^1.16
+
+#   500        13.9750000         0.0279500         0.0180906         0.0103406
+#  1000        30.9300000         0.0309300         0.0190713         0.0102419
+#  2000        68.6430000         0.0343215         0.0201602         0.0101719
+#  4000       147.9970000         0.0369993         0.0207037         0.0098144
+#  8000       317.7510000         0.0397189         0.0211729         0.0094298
+  16000       682.0000000         0.0426250         0.0216459         0.0090574
+  32000      1453.0000000         0.0454063         0.0219662         0.0086356
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.07
+Cota sobreestimada: n^1.16
+
+Umbral 100:
+Ordenación rápida, inicialización descendente
+    n             t(n)            t/n^1.00          t/n^1.16          t/n^1.22
+#   500         8.1250000         0.0162500         0.0060120         0.0041408
+#  1000        19.1710000         0.0191710         0.0063481         0.0041942
+#  2000        44.1800000         0.0220900         0.0065468         0.0041492
+#  4000       100.0210000         0.0250052         0.0066329         0.0040325
+#  8000       222.6160000         0.0278270         0.0066065         0.0038529
+# 16000       491.9110000         0.0307444         0.0065329         0.0036548
+  32000      1075.0000000         0.0335937         0.0063890         0.0034287
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.16
+Cota sobreestimada: n^1.22
+
+INICIALIZACIÓN ALEATORIA---------------------
+
+Umbral 1:
+Ordenación rápida, inicialización aleatoria
+    n             t(n)            t/n^1.00          t/n^1.08          t/n^1.15
+#   500        62.5680000         0.1251360         0.0761140         0.0492648
+#  1000       136.8180000         0.1368180         0.0787305         0.0485449
+#  2000       297.2700000         0.1486350         0.0809168         0.0475299
+   4000       646.0000000         0.1615000         0.0831778         0.0465440
+   8000      1372.0000000         0.1715000         0.0835635         0.0445452
+  16000      2931.0000000         0.1831875         0.0844435         0.0428823
+  32000      6234.0000000         0.1948125         0.0849581         0.0411002
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.08
+Cota sobreestimada: n^1.15
+
+Umbral 10:
+Ordenación rápida, inicialización aleatoria
+    n             t(n)            t/n^1.00          t/n^1.08          t/n^1.20
+#   500        54.0700000         0.1081400         0.0657762         0.0312027
+#  1000       119.8290000         0.1198290         0.0689544         0.0300997
+#  2000       264.0150000         0.1320075         0.0718648         0.0288664
+   4000       572.0000000         0.1430000         0.0736497         0.0272222
+   8000      1243.0000000         0.1553750         0.0757066         0.0257492
+  16000      2651.0000000         0.1656875         0.0763765         0.0239037
+  32000      5674.0000000         0.1773125         0.0773263         0.0222694
+
+
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.08
+Cota sobreestimada: n^1.20
+
+Umbral 100:
+Ordenación rápida, inicialización aleatoria
+    n             t(n)            t/n^1.00          t/n^1.09          t/n^1.15
+#   500        61.8080000         0.1236160         0.0706590         0.0486664
+#  1000       134.7660000         0.1347660         0.0723736         0.0478168
+#  2000       294.2000000         0.1471000         0.0742198         0.0470390
+   4000       643.0000000         0.1607500         0.0762018         0.0463278
+   8000      1375.0000000         0.1718750         0.0765481         0.0446426
+  16000      2966.0000000         0.1853750         0.0775676         0.0433944
+  32000      6261.0000000         0.1956563         0.0769184         0.0412783
+
+Cota subestimada: n^1.00
+Cota ajustada: n^1.09
+Cota sobreestimada: n^1.15
+
+
+Conclusión:
+
+Podemos observar que para la inicialización aleatoria el umbral 10 es el mejor, puesto que 
+optimiza los casos más pequeños con el algoritmo auxiliar con respecto a umbral 1. 
+Cuando el umbral crece a 100, los vectores que ordena el algoritmo auxiliar, mucho menos eficiente para vectores grandes, tardan más en ordenarse, por lo que el tiempo vuelve a crecer con respecto
+al umbral 10.
+
+En el caso de la inicialización ascendente, vemos que la eficiencia es directamente
+proporcional al tamaño de umbral usado. Esto nos da a entender que el algoritmo de ordenación
+auxiliar es mucho más eficiente para comprobar si un vector ya está ordenado.
+
+En el caso de la inicialización descendente, vemos que a mayor tamaño de umbral, menos tiempo, 
+de lo que inferimos que quicksort es peor en el caso de tener un vector ordenado a la inversa
+que en el algoritmo auxiliar, presumiblemente por la alta cantidad de intercambios necesarios.
+
+
+*Tomamos la complejidad de cada algoritmo como la cota ajustada de cada algoritmo.

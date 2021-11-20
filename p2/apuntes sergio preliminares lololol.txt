@@ -1,0 +1,11 @@
+seleccion
+peor caso y caso medio cuadratica
+mejor caso n
+
+shell
+(?)
+peor caso cuadratica
+medio
+n log n
+mejor 
+n log n
