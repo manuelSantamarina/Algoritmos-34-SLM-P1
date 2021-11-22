@@ -5,36 +5,14 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
-#define UMBRAL 1 //Constante utilizada para el quicksort
-
-/*
- * SANGRADO
- * FALTABA LA T EN LAS CABECERAS
- * EN INTRODUCCION FALTABA  HABLAR DE LO DE LA # (PARA QUE SERVIA)
- * EL * SE PONE EN LOS TIEMPOS, NO EN LA DIVISION
- * LA CONCLUSION ESTABA MAL->REVISAR BIEN LA NUEVA
- */
-
-
+#define TAM_MAX 1600
+//Es posible que el cuadrado del número de nodos
 
 /*Autores:
 Luis Bardanca Rey (l.bardanca.rey)
 Manuel Santamariña Ruiz de León (manuel.santamarina)
 Sergio Goyanes Legazpi (sergio.legazpi)
 */
-typedef struct execData 
-{
-    char titulo [32];
-    
-    float cotaAjustada;
-    float cotaSubestimada;
-    float cotaSobreestimada;
-    void(*ini1)(int *, int);
-    void(*ini2)(int *, int);
-    void(*ini3)(int *, int);
-    void(*ord)(int *, int);
-    char *inicializaciones[];
-}execData;
 double microsegundos(){
     struct timeval t;
     if(gettimeofday(&t, NULL) < 0)
@@ -313,35 +291,73 @@ void tablas_tripleinit(char *titulo,
 	}
     printDescripCotas(cotasAle);
 }
+//P4
+typedef int ** matriz;
+typedef struct {
+int x, y, peso;
+} arista;
 
-int main() {
-    inicializar_semilla();
-    printf("Ordenación por inserción:\n");
-    test(ord_ins);
-    printf("Ordenación por quicksort:\n");
-    test(ord_rapida);
+typedef arista tipo_elemento;
+typedef struct {
+int cabeza, final, tamano;
+tipo_elemento vector[TAM_MAX];
+} cola;
+void crear_cola(cola *);
+int cola_vacia(cola);
+void insertar(tipo_elemento, cola *);
+tipo_elemento quitar_primero(cola *);
+tipo_elemento primero(cola);
+void mostrar_cola(cola);
 
-    //cota subestimada, ajustada y sobreestimada
-    float cotasAsc1[3] = {0.9f, 1.0f, 1.1f};
-    float cotasDesc1[3] = {1.9f, 2.0f, 2.1f};
-    float cotasAle1[3] = {1.9f, 2.0f, 2.1f};
+void prim(matriz m, int nodos, cola *aristas) {
+/* calcular el árbol de recubrimiento mínimo devolviendo
+las aristas del arbol en la cola ’aristas’ */
+int min, i, j, k=0;
+arista a;
+int *masProximo = (int *) malloc(nodos*sizeof(int));
+int *distanciaMinima = (int *) malloc(nodos*sizeof(int));
+crear_cola(aristas);
+distanciaMinima[0] = -1;
+for(i = 1; i < nodos; i++) {
+masProximo[i] = 0;
+distanciaMinima[i] = m[i][0];
+}
+/*
+...
+*/
+free(masProximo);
+free(distanciaMinima);
+}
 
-    tablas_tripleinit("Ordenación por inserción",cotasAsc1,cotasDesc1,cotasAle1, 
-    ord_ins);
+matriz crear_matriz(int n) {
+    int i;
+    matriz aux;
+    if ((aux = malloc(n*sizeof(int *))) == NULL)
+    return NULL;
+    for (i=0; i<n; i++)
+    if ((aux[i] = malloc(n*sizeof(int))) == NULL)
+    return NULL;
+    return aux;
+}
+void inicializar_matriz(matriz m, int n) {
+    /* Crea un grafo completo no dirigido con valores aleatorios entre 1 y n */
+    int i, j;
+    for (i=0; i<n; i++)
+        for (j=i+1; j<n; j++)
+            m[i][j] = rand() % n + 1;
+        for (i=0; i<n; i++)
+            for (j=0; j<=i; j++)
+                if (i==j)
+                    m[i][j] = 0;
+                else
+                    m[i][j] = m[j][i];
+    }
 
-    float cotasAsc2[3] = {1.0f, 1.07f, 1.22f};
-    float cotasDesc2[3] = {1.0f, 1.07f, 1.16f};
-    float cotasAle2[3] = {1.0f, 1.08f, 1.15f};
-
-    //Cotas umbral 10
-    // float cotasAsc2[3] = {1.0f, 1.07f, 1.22f};
-    // float cotasDesc2[3] = {1.0f, 1.07f, 1.16f};
-    // float cotasAle2[3] = {1.0f, 1.08f, 1.2f};
-    //Cotas umbral 100
-    // float cotasAsc2[3] = {1.0f, 1.07f, 1.15f};
-    // float cotasDesc2[3] = {1.0f, 1.16f, 1.22f};
-    // float cotasAle2[3] = {1.0f, 1.09f, 1.15f};
-
-    tablas_tripleinit("Ordenación rápida",cotasAsc2,cotasDesc2,cotasAle2,
-     ord_rapida);
+void liberar_matriz(matriz m, int n) {
+    int i;
+    for (i=0; i<n; i++)
+        free(m[i]);
+        free(m);
+    }
+    int main() {
 }
